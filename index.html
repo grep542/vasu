@@ -58,18 +58,36 @@
   }
 
   .toggle {
-    background: var(--toggle-bg);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    padding: 4px 10px;
+    position: relative;
+    width: 40px;
+    height: 22px;
+    background: var(--border);
+    border: none;
+    border-radius: 999px;
     cursor: pointer;
-    border-radius: 2px;
-    letter-spacing: 0.04em;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    padding: 0;
+    transition: background 0.25s;
+    flex-shrink: 0;
   }
-  .toggle:hover { color: var(--text); }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.25s, background 0.25s;
+  }
+  [data-theme="dark"] .toggle {
+    background: #555;
+  }
+  [data-theme="dark"] .toggle::after {
+    transform: translateX(18px);
+    background: #e2e2e2;
+  }
 
   /* HEADER */
   .header {
@@ -249,11 +267,12 @@
     .blog-item { flex-direction: column; gap: 2px; }
   }
 </style>
+<script>function toggleTheme(){var h=document.documentElement;h.setAttribute("data-theme",h.getAttribute("data-theme")==="dark"?"light":"dark");}</script>
 </head>
 <body>
 
 <div class="topbar">
-  <button class="toggle" onclick="toggleTheme()" id="toggle-btn">[ dark ]</button>
+  <button class="toggle" onclick="toggleTheme()" id="toggle-btn" aria-label="Toggle dark mode"></button>
 </div>
 
 <!-- HEADER -->
@@ -263,7 +282,7 @@
     <h1>Vasu Dubey</h1>
     <p class="location">grew up in Rewa, MP &mdash; now in Bangalore</p>
     <div class="header-links">
-      <a href="mailto:vasudubey02@gmail.com">email</a>
+      <a href="/cdn-cgi/l/email-protection#7e081f0d0b1a0b1c1b074e4c3e19131f1712501d1113">email</a>
       <a href="https://x.com/vasu5911" target="_blank">twitter</a>
       <a href="https://www.linkedin.com/in/vasu-dubey-b191461b4/" target="_blank">linkedin</a>
       <a href="https://youtu.be/HwM8fCuJWZU" target="_blank">youtube</a>
@@ -362,18 +381,9 @@
 <hr>
 
 <footer>
-  vasu dubey &mdash; bangalore &mdash; vasudubey02@gmail.com
+  vasu dubey &mdash; bangalore &mdash; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f0869183859485929589c0c2b0979d91999cde939f9d">[email&#160;protected]</a>
 </footer>
 
 <script>
   function toggleTheme() {
-    const html = document.documentElement;
-    const btn = document.getElementById('toggle-btn');
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    btn.textContent = isDark ? '[ dark ]' : '[ light ]';
-  }
-</script>
-
-</body>
-</html>
+    const html = document.documentEle
